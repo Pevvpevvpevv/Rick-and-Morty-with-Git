@@ -31,10 +31,10 @@ class EpisodesCell: UICollectionViewCell {
         return view
     }()
     
-    private let heartIV: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "UnfilledRedHeart")
-        return imageView
+    private let heartButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "UnfilledRedHeart"), for: .normal)
+        return button
     }()
     
     private lazy var characterIV: UIImageView = {
@@ -96,7 +96,7 @@ class EpisodesCell: UICollectionViewCell {
         bottomView.addSubview(episodeNameLabel)
         bottomView.addSubview(separationView)
         bottomView.addSubview(episodeNumber)
-        bottomView.addSubview(heartIV)
+        bottomView.addSubview(heartButton)
     }
     
     func configureUI() {
@@ -114,7 +114,7 @@ class EpisodesCell: UICollectionViewCell {
         episodeNameLabel.translatesAutoresizingMaskIntoConstraints = false
         separationView.translatesAutoresizingMaskIntoConstraints = false
         episodeNumber.translatesAutoresizingMaskIntoConstraints = false
-        heartIV.translatesAutoresizingMaskIntoConstraints = false
+        heartButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             characterIV.heightAnchor.constraint(equalToConstant: 232),
@@ -145,8 +145,8 @@ class EpisodesCell: UICollectionViewCell {
             episodeNumber.leadingAnchor.constraint(equalTo: separationView.trailingAnchor, constant: 5),
             episodeNumber.topAnchor.constraint(equalTo: bottomView.centerYAnchor, constant: -5),
             
-            heartIV.trailingAnchor.constraint(equalTo: bottomView.trailingAnchor, constant: -20),
-            heartIV.topAnchor.constraint(equalTo: bottomView.centerYAnchor, constant: -15),
+            heartButton.trailingAnchor.constraint(equalTo: bottomView.trailingAnchor, constant: -20),
+            heartButton.topAnchor.constraint(equalTo: bottomView.centerYAnchor, constant: -15),
         ])
     }
 }

@@ -1,5 +1,5 @@
 //
-//  ViewModel.swift
+//  MockEpisodesViewModel.swift
 //  Rick-and-Morty
 //
 //  Created by Maxim Maxim on 29.04.2024.
@@ -8,7 +8,7 @@
 import UIKit
 
 //MARK: - MockViewModel
-class MockEpisodesViewModel {
+final class MockEpisodesViewModel {
     var MockEpisodesContent: [MockEpisodesModel]
     init() {
         self.MockEpisodesContent = {

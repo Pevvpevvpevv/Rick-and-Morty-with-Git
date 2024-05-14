@@ -28,13 +28,13 @@ final class TabBarCoordinator: TabBarCoordinatorProtocol {
     
     func showTabBarController() {
         let tabBar = TabBarAssembly.configure(dependencies)
-        let navVC = UINavigationController(rootViewController: tabBar)
+//        let navVC = UINavigationController(rootViewController: tabBar)
         if let window = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first {
-            window.rootViewController = navVC
+            window.rootViewController = tabBar
             UIView.transition(with: window, duration: 1.0, options: [.transitionCrossDissolve], animations: nil, completion: nil)
         } else {
-            navVC.modalPresentationStyle = .fullScreen
-            navigationController.showDetailViewController(navVC, sender: self)
+            tabBar.modalPresentationStyle = .fullScreen
+            navigationController.showDetailViewController(tabBar, sender: self)
         }
     }
 }

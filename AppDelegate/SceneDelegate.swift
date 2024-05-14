@@ -16,6 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         configureScene(windowScene)
 //        dependencies.analyticsReporterService.reportEvent(with: "Launch Event", parameters: nil)
+        
     }
     
     private func configureScene(_ windowScene: UIWindowScene) {

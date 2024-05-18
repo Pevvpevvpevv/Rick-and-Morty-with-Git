@@ -9,6 +9,7 @@ import UIKit
 
 protocol EpisodesCoordinatorProtocol: Coordinator {
     func start()
+    func showCharacterVC()
 }
 
 final class EpisodesCoordinator: EpisodesCoordinatorProtocol {
@@ -27,6 +28,11 @@ final class EpisodesCoordinator: EpisodesCoordinatorProtocol {
     }
     
     func showEpisodesVC() {
-        let episodesVC = EpisodesAssembly.configure(dependencies)
+        let episodesVC = EpisodesAssembly.configure(dependencies, coordinator: self)
+    }
+    
+    func showCharacterVC() {
+        let characterVC = CharacterAssembly.configure(dependencies)
+        navigationController.pushViewController(characterVC, animated: true)
     }
 }

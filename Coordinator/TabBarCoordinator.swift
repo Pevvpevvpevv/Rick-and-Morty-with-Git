@@ -27,7 +27,8 @@ final class TabBarCoordinator: TabBarCoordinatorProtocol {
     }
     
     func showTabBarController() {
-        let tabBar = TabBarAssembly.configure(dependencies)
+        let tabBar = TabBarAssembly.configure(dependencies, coordinator: self)
+//        navigationController.pushViewController(tabBar, animated: false)
 //        let navVC = UINavigationController(rootViewController: tabBar)
         if let window = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first {
             window.rootViewController = tabBar

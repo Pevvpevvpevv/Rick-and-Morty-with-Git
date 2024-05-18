@@ -68,6 +68,7 @@ final class CharacterVC: UIViewController {
     
     private func configureNavBar() {
         let appearance = UINavigationBarAppearance()
+        navigationController?.isNavigationBarHidden = false
         appearance.backgroundColor = .white
         navigationItem.scrollEdgeAppearance = appearance
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "GoBack"), style: .done, target: self, action: #selector(popToRoot))

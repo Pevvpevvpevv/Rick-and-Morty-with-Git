@@ -8,6 +8,10 @@
 import UIKit
 
 final class EpisodesVC: UIViewController {
+    // MARK: - Dependcies
+    
+    var coordinator: EpisodesCoordinatorProtocol?
+    
     // MARK: - Property
     private lazy var mainTitleIV = makeMainTitleIV()
     private lazy var magnifyIV = makeMagnifyIV()
@@ -33,6 +37,10 @@ final class EpisodesVC: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
+    func setupCoordinator(coordinator: EpisodesCoordinatorProtocol) {
+        self.coordinator = coordinator
     }
     
     //MARK: - Methods
@@ -162,8 +170,9 @@ final class EpisodesVC: UIViewController {
 extension EpisodesVC: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        navigationController?.pushViewController(CharacterVC(), animated: true)
+//        navigationController?.pushViewController(CharacterVC(), animated: true)
         // delegate?.push()
+        coordinator?.showCharacterVC()
     }
     /*
      1. создать протокол для пуша детальной ВС, где будет метод для пуша;

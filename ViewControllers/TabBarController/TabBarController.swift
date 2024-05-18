@@ -9,14 +9,24 @@ import UIKit
 
 final class TabBarController: UITabBarController {
     
+    var coordinator: TabBarCoordinatorProtocol?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    func setupCoordinator(coordinator: TabBarCoordinatorProtocol) {
+        self.coordinator = coordinator
         setupTabs()
-        
     }
     
    private func setupTabs() {
-       let house = createNavBar(with: UIImage(systemName: "house"), and: UIImage(systemName: "house.fill"), vc: EpisodesVC())
+       let dependencies = DependenciesMock()
+       guard let navigationController = coordinator?.navigationController else { return }
+       let episodesCordinator: EpisodesCoordinatorProtocol = EpisodesCoordinator(navigationController, dependencies: dependencies)
+       let episodesVC = EpisodesAssembly.configure(dependencies, coordinator: episodesCordinator)
+       
+       let house = createNavBar(with: UIImage(systemName: "house"), and: UIImage(systemName: "house.fill"), vc: episodesVC)
        let heart = createNavBar(with: UIImage(systemName: "heart"), and: UIImage(systemName: "heart.fill"), vc: FavouritesVC())
        self.tabBar.layer.masksToBounds = false
        self.tabBar.layer.shadowRadius = 20

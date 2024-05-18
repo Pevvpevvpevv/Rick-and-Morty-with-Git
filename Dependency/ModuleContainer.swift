@@ -9,10 +9,10 @@ import UIKit
 
 protocol ModuleContainerProtocol {
     func getLaunchView() -> UIViewController
-    func getEpisodesView() -> UIViewController
+    func getEpisodesView(coordinator: EpisodesCoordinatorProtocol) -> UIViewController
     func getCharacterView() -> UIViewController
     func getFavouritesView() -> UIViewController
-    func getTabBarController() -> UITabBarController
+    func getTabBarController(coordinator: TabBarCoordinatorProtocol) -> UITabBarController
 }
 
 final class ModuleContainer: ModuleContainerProtocol {
@@ -29,8 +29,9 @@ extension ModuleContainer {
 }
 
 extension ModuleContainer {
-    func getEpisodesView() -> UIViewController {
+    func getEpisodesView(coordinator: EpisodesCoordinatorProtocol) -> UIViewController {
         let view = EpisodesVC()
+        view.setupCoordinator(coordinator: coordinator)
         return view
     }
 }
@@ -54,8 +55,9 @@ extension ModuleContainer {
 }
 
 extension ModuleContainer {
-    func getTabBarController() -> UITabBarController {
+    func getTabBarController(coordinator: TabBarCoordinatorProtocol) -> UITabBarController {
         let tabBar = TabBarController()
+        tabBar.setupCoordinator(coordinator: coordinator)
         return tabBar
     }
 }

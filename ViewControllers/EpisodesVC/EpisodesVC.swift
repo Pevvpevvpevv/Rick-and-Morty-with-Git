@@ -16,7 +16,7 @@ final class EpisodesVC: UIViewController {
     private lazy var scrollView = makeScrollView()
     private lazy var collectionView = makeCollectionView()
     private var viewModel = MockEpisodesViewModel()
-    fileprivate let finderTextField = FinderTextField(placeholder: "Name or episode (ex.S01E01)...")
+    private let finderTextField = FinderTextField(placeholder: "Name or episode (ex.S01E01)...")
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -159,45 +159,18 @@ final class EpisodesVC: UIViewController {
     }
 }
 
-fileprivate final class FinderTextField: UITextField {
-    let padding = UIEdgeInsets(top: 0, left: 50, bottom: 0, right: 20)
-    
-    init(placeholder: String) {
-        super.init(frame: .zero)
-        makeFinderTextField(placeholder: placeholder)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func textRect(forBounds bounds: CGRect) -> CGRect {
-        bounds.inset(by: padding)
-    }
-    
-    override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
-        bounds.inset(by: padding)
-    }
-    
-    override func editingRect(forBounds bounds: CGRect) -> CGRect {
-        bounds.inset(by: padding)
-    }
-    
-    func makeFinderTextField(placeholder: String) {
-        textColor = .darkGray
-        tintColor = .darkGray
-        layer.borderColor = UIColor.darkGray.cgColor
-        layer.borderWidth = 1
-        layer.cornerRadius = 8
-        attributedPlaceholder = NSAttributedString(string: placeholder)
-    }
-}
-
 extension EpisodesVC: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         navigationController?.pushViewController(CharacterVC(), animated: true)
+        // delegate?.push()
     }
+    /*
+     1. создать протокол для пуша детальной ВС, где будет метод для пуша;
+     2. подписать протокол на эпизодс координатор;
+     3. создать экземпляр делегата на эпизодс вью контроллер;
+     4. подпи
+     */
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.MockEpisodesContent.count

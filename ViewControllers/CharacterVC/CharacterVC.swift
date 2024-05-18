@@ -22,6 +22,11 @@ final class CharacterVC: UIViewController {
         configureNavBar()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        characterButton.setImage(UIImage(named: "MockImage"), for: .normal)
+    }
+    
     private func setupUI() {
         view.backgroundColor = .white
         view.addSubview(characterButton)
@@ -57,14 +62,14 @@ final class CharacterVC: UIViewController {
             tableView.widthAnchor.constraint(equalToConstant: 312),
             tableView.topAnchor.constraint(equalTo: infoLabel.bottomAnchor, constant: 10),
             tableView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            underTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             tableView.heightAnchor.constraint(equalToConstant: 360),
-            
-            
         ])
     }
     
     private func configureNavBar() {
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = .white
+        navigationItem.scrollEdgeAppearance = appearance
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "GoBack"), style: .done, target: self, action: #selector(popToRoot))
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "NavBarRightItem"), style: .plain, target: false, action: nil)
         navigationItem.rightBarButtonItem?.tintColor = .black
@@ -75,9 +80,6 @@ final class CharacterVC: UIViewController {
         navigationController?.navigationBar.layer.shadowRadius = 2.5
         navigationController?.navigationBar.layer.shadowOpacity = 0.15
         navigationController?.navigationBar.layer.shadowColor = UIColor.black.cgColor
-        //        navigationController?.navigationBar.topAttached = true
-        //        navigationController?.navigationBar.barTintColor = .white
-        //        navigationController?.navigationBar.isTranslucent = false
     }
     
     @objc private func popToRoot() {
@@ -90,7 +92,6 @@ final class CharacterVC: UIViewController {
         button.layer.borderWidth = 5
         button.layer.borderColor = UIColor.systemGray6.cgColor
         button.contentMode = .scaleAspectFill
-        button.setImage(UIImage(named: "MockImage"), for: .normal)
         button.clipsToBounds = true
         return button
     }
@@ -137,7 +138,7 @@ final class CharacterVC: UIViewController {
 extension CharacterVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       return viewModel.mockCharacterContent.count
+        return viewModel.mockCharacterContent.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -148,7 +149,7 @@ extension CharacterVC: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }

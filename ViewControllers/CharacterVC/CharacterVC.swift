@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol CharacterViewControllerDelegate: AnyObject {
+    func didPushCharacterVC()
+}
+
 final class CharacterVC: UIViewController {
     private lazy var characterButton = makeCharacterButton()
     private lazy var cameraButton = makeCameraButton()
@@ -71,7 +75,7 @@ final class CharacterVC: UIViewController {
         appearance.backgroundColor = .white
         navigationItem.scrollEdgeAppearance = appearance
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "GoBack"), style: .done, target: self, action: #selector(popToRoot))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "NavBarRightItem"), style: .plain, target: false, action: nil)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "NavBarRightItem"), style: .plain, target: .none, action: .none)
         navigationItem.rightBarButtonItem?.tintColor = .black
         navigationItem.leftBarButtonItem?.tintColor = .black
         navigationController?.navigationBar.backgroundColor = .white

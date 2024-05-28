@@ -21,7 +21,7 @@ final class AppCoordinator: AppCoordinatorProtocol {
     
     required init(_ navigationController: UINavigationController, dependencies: DependenciesProtocol) {
         self.navigationController = navigationController
-        navigationController.setNavigationBarHidden(true, animated: true)
+//        navigationController.setNavigationBarHidden(true, animated: true)
         self.dependencies = dependencies
         //        self.userDefaultsRepository = dependencies.userDefaultsRepository
     }
@@ -51,7 +51,7 @@ extension AppCoordinator: CoordinatorFinishDelegate {
         switch childCoordinator.type {
         case .launch:
             showMainFlow()
-        case .app, .episodes, .favourites, .character, .tabBar: break
+        case .app, .tabBar: break
         }
     }
 }

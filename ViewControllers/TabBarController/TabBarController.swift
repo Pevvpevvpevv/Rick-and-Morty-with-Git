@@ -8,16 +8,18 @@
 import UIKit
 
 final class TabBarController: UITabBarController {
+//    private let episodesVC = EpisodesViewController()
+//    private let favouritesVC = FavouritesVC()
+    weak var coordinator: TabBarCoordinatorProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTabs()
-        
     }
     
    private func setupTabs() {
-       let house = createNavBar(with: UIImage(systemName: "house"), and: UIImage(systemName: "house.fill"), vc: EpisodesVC())
-       let heart = createNavBar(with: UIImage(systemName: "heart"), and: UIImage(systemName: "heart.fill"), vc: FavouritesVC())
+//       let house = createNavBar(with: UIImage(systemName: "house"), and: UIImage(systemName: "house.fill"), vc: episodesVC)
+//       let heart = createNavBar(with: UIImage(systemName: "heart"), and: UIImage(systemName: "heart.fill"), vc: favouritesVC)
        self.tabBar.layer.masksToBounds = false
        self.tabBar.layer.shadowRadius = 20
        self.tabBar.layer.shadowOpacity = 120
@@ -28,7 +30,7 @@ final class TabBarController: UITabBarController {
        self.tabBar.backgroundColor = .white
        self.tabBar.unselectedItemTintColor = UIColor(named: "TabBarItemsFrame")
        self.tabBar.tintColor = UIColor(named: "TappedItem")
-       self.setViewControllers([house, heart], animated: true)
+//       self.setViewControllers([house, heart], animated: true)
     }
     
     private func createNavBar(with image: UIImage?, and activatedImage: UIImage?, vc: UIViewController) -> UINavigationController {

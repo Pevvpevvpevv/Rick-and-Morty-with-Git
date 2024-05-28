@@ -13,12 +13,10 @@
 		507100192BF86E720032CEF7 /* Extension + placeHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507100182BF86E720032CEF7 /* Extension + placeHolder.swift */; };
 		50740DA42BAB129A000855B8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50740DA32BAB129A000855B8 /* AppDelegate.swift */; };
 		50740DA62BAB129A000855B8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50740DA52BAB129A000855B8 /* SceneDelegate.swift */; };
-		50740DA82BAB129A000855B8 /* EpisodesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50740DA72BAB129A000855B8 /* EpisodesVC.swift */; };
+		50740DA82BAB129A000855B8 /* EpisodesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50740DA72BAB129A000855B8 /* EpisodesViewController.swift */; };
 		50740DB82BAB2AFE000855B8 /* CharacterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50740DB72BAB2AFE000855B8 /* CharacterVC.swift */; };
 		50740DBA2BAB2B2A000855B8 /* LaunchScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50740DB92BAB2B2A000855B8 /* LaunchScreenVC.swift */; };
 		50740DBC2BAB2B7F000855B8 /* FavouritesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50740DBB2BAB2B7F000855B8 /* FavouritesVC.swift */; };
-		5078C3AD2BD01B5A00892A34 /* FavouritesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5078C3AC2BD01B5A00892A34 /* FavouritesCoordinator.swift */; };
-		5078C3AF2BD01B6A00892A34 /* CharacterCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5078C3AE2BD01B6A00892A34 /* CharacterCoordinator.swift */; };
 		5078C3B12BD01B7D00892A34 /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5078C3B02BD01B7D00892A34 /* TabBarCoordinator.swift */; };
 		5078C3B32BD01F5600892A34 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5078C3B22BD01F5600892A34 /* TabBarController.swift */; };
 		5078C3B62BD01F8200892A34 /* TabBarAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5078C3B52BD01F8200892A34 /* TabBarAssembly.swift */; };
@@ -30,7 +28,6 @@
 		507E63012BCD8DB3003DF0C1 /* FavouritesAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507E63002BCD8DB3003DF0C1 /* FavouritesAssembly.swift */; };
 		507FDE7C2BCA811600436360 /* Dependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507FDE7B2BCA811600436360 /* Dependencies.swift */; };
 		507FDE7E2BCAAE1C00436360 /* LaunchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507FDE7D2BCAAE1C00436360 /* LaunchCoordinator.swift */; };
-		507FDE802BCAC20700436360 /* EpisodesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507FDE7F2BCAC20700436360 /* EpisodesCoordinator.swift */; };
 		507FDE822BCAC29000436360 /* ModuleContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507FDE812BCAC29000436360 /* ModuleContainer.swift */; };
 		508102C02BDFAA3B0013D6D1 /* MockEpisodesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508102BF2BDFAA3B0013D6D1 /* MockEpisodesModel.swift */; };
 		508102C22BDFAA4B0013D6D1 /* MockEpisodesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508102C12BDFAA4B0013D6D1 /* MockEpisodesViewModel.swift */; };
@@ -49,12 +46,10 @@
 		50740DA02BAB129A000855B8 /* Rick-and-Morty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Rick-and-Morty.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		50740DA32BAB129A000855B8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		50740DA52BAB129A000855B8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		50740DA72BAB129A000855B8 /* EpisodesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodesVC.swift; sourceTree = "<group>"; };
+		50740DA72BAB129A000855B8 /* EpisodesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodesViewController.swift; sourceTree = "<group>"; };
 		50740DB72BAB2AFE000855B8 /* CharacterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterVC.swift; sourceTree = "<group>"; };
 		50740DB92BAB2B2A000855B8 /* LaunchScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenVC.swift; sourceTree = "<group>"; };
 		50740DBB2BAB2B7F000855B8 /* FavouritesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesVC.swift; sourceTree = "<group>"; };
-		5078C3AC2BD01B5A00892A34 /* FavouritesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesCoordinator.swift; sourceTree = "<group>"; };
-		5078C3AE2BD01B6A00892A34 /* CharacterCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCoordinator.swift; sourceTree = "<group>"; };
 		5078C3B02BD01B7D00892A34 /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
 		5078C3B22BD01F5600892A34 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		5078C3B52BD01F8200892A34 /* TabBarAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarAssembly.swift; sourceTree = "<group>"; };
@@ -66,7 +61,6 @@
 		507E63002BCD8DB3003DF0C1 /* FavouritesAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesAssembly.swift; sourceTree = "<group>"; };
 		507FDE7B2BCA811600436360 /* Dependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dependencies.swift; sourceTree = "<group>"; };
 		507FDE7D2BCAAE1C00436360 /* LaunchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchCoordinator.swift; sourceTree = "<group>"; };
-		507FDE7F2BCAC20700436360 /* EpisodesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodesCoordinator.swift; sourceTree = "<group>"; };
 		507FDE812BCAC29000436360 /* ModuleContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleContainer.swift; sourceTree = "<group>"; };
 		508102BF2BDFAA3B0013D6D1 /* MockEpisodesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockEpisodesModel.swift; sourceTree = "<group>"; };
 		508102C12BDFAA4B0013D6D1 /* MockEpisodesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockEpisodesViewModel.swift; sourceTree = "<group>"; };
@@ -105,7 +99,7 @@
 				50740DC12BAB36B5000855B8 /* UIElements */,
 				507F03322BC08792001CD02F /* AppDelegate */,
 				50740DBD2BAB2BB0000855B8 /* ViewControllers */,
-				507FDE7A2BCA80F900436360 /* Dependency */,
+				507FDE7A2BCA80F900436360 /* Services */,
 				5089C5B32BC80F3800BCE023 /* Coordinator */,
 				50740DA12BAB129A000855B8 /* Products */,
 			);
@@ -151,7 +145,7 @@
 		507E62F62BCD7F01003DF0C1 /* EpisodesVC */ = {
 			isa = PBXGroup;
 			children = (
-				50740DA72BAB129A000855B8 /* EpisodesVC.swift */,
+				50740DA72BAB129A000855B8 /* EpisodesViewController.swift */,
 				507E62FC2BCD8D40003DF0C1 /* EpisodesAssembly.swift */,
 				5084F4522BDC10A40088EA1F /* EpisodesCell.swift */,
 				507100182BF86E720032CEF7 /* Extension + placeHolder.swift */,
@@ -196,13 +190,13 @@
 			path = AppDelegate;
 			sourceTree = "<group>";
 		};
-		507FDE7A2BCA80F900436360 /* Dependency */ = {
+		507FDE7A2BCA80F900436360 /* Services */ = {
 			isa = PBXGroup;
 			children = (
 				507FDE7B2BCA811600436360 /* Dependencies.swift */,
 				507FDE812BCAC29000436360 /* ModuleContainer.swift */,
 			);
-			path = Dependency;
+			path = Services;
 			sourceTree = "<group>";
 		};
 		508102BE2BDFAA270013D6D1 /* Model */ = {
@@ -223,9 +217,6 @@
 				5089C5B62BC812D100BCE023 /* AppCoordinator.swift */,
 				507FDE7D2BCAAE1C00436360 /* LaunchCoordinator.swift */,
 				5078C3B02BD01B7D00892A34 /* TabBarCoordinator.swift */,
-				507FDE7F2BCAC20700436360 /* EpisodesCoordinator.swift */,
-				5078C3AC2BD01B5A00892A34 /* FavouritesCoordinator.swift */,
-				5078C3AE2BD01B6A00892A34 /* CharacterCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -302,18 +293,15 @@
 			files = (
 				5089C5B52BC80F5500BCE023 /* Coordinator.swift in Sources */,
 				50740DB82BAB2AFE000855B8 /* CharacterVC.swift in Sources */,
-				5078C3AD2BD01B5A00892A34 /* FavouritesCoordinator.swift in Sources */,
 				506FB1582BF02A16001983FF /* CharacterCell.swift in Sources */,
-				50740DA82BAB129A000855B8 /* EpisodesVC.swift in Sources */,
+				50740DA82BAB129A000855B8 /* EpisodesViewController.swift in Sources */,
 				50740DBC2BAB2B7F000855B8 /* FavouritesVC.swift in Sources */,
 				508102C22BDFAA4B0013D6D1 /* MockEpisodesViewModel.swift in Sources */,
 				507FDE822BCAC29000436360 /* ModuleContainer.swift in Sources */,
 				50740DBA2BAB2B2A000855B8 /* LaunchScreenVC.swift in Sources */,
-				507FDE802BCAC20700436360 /* EpisodesCoordinator.swift in Sources */,
 				507FDE7E2BCAAE1C00436360 /* LaunchCoordinator.swift in Sources */,
 				50FEF0B22BB2D76C007CF2A9 /* UIImageView + extension.swift in Sources */,
 				5089C5B72BC812D100BCE023 /* AppCoordinator.swift in Sources */,
-				5078C3AF2BD01B6A00892A34 /* CharacterCoordinator.swift in Sources */,
 				506FB1542BF021B1001983FF /* MockCharacterModel.swift in Sources */,
 				5078C3B32BD01F5600892A34 /* TabBarController.swift in Sources */,
 				507100192BF86E720032CEF7 /* Extension + placeHolder.swift in Sources */,

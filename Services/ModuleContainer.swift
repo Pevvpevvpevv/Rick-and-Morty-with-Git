@@ -9,10 +9,10 @@ import UIKit
 
 protocol ModuleContainerProtocol {
     func getLaunchView() -> UIViewController
-    func getEpisodesView() -> UIViewController
+    func getEpisodesView(delegate: CharacterViewControllerDelegate) -> UIViewController
     func getCharacterView() -> UIViewController
     func getFavouritesView() -> UIViewController
-    func getTabBarController() -> UITabBarController
+    func getTabBarController(_ coordinator: TabBarCoordinatorProtocol?, delegate: CharacterViewControllerDelegate) -> UITabBarController
 }
 
 final class ModuleContainer: ModuleContainerProtocol {
@@ -29,9 +29,12 @@ extension ModuleContainer {
 }
 
 extension ModuleContainer {
-    func getEpisodesView() -> UIViewController {
-        let view = EpisodesVC()
-        return view
+    func getEpisodesView(delegate: CharacterViewControllerDelegate) -> UIViewController {
+        let view = EpisodesViewController()
+        view.characterViewControllerDelegate = delegate
+        let navController = UINavigationController(rootViewController: view)
+
+        return navController
     }
 }
 
@@ -54,8 +57,13 @@ extension ModuleContainer {
 }
 
 extension ModuleContainer {
-    func getTabBarController() -> UITabBarController {
+    func getTabBarController(_ coordinator: TabBarCoordinatorProtocol?, delegate: CharacterViewControllerDelegate) -> UITabBarController {
         let tabBar = TabBarController()
+        let episodesVC = EpisodesAssembly.configure(dependencies, delegate: delegate)
+        let favouritesVC = FavouritesAssembly.configure(dependencies)
+        
+        tabBar.viewControllers = [episodesVC, favouritesVC]
+
         return tabBar
     }
 }

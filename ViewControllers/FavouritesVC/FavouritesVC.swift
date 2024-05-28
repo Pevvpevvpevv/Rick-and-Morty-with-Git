@@ -8,7 +8,7 @@
 import UIKit
 
 final class FavouritesVC: UIViewController {
-    
+    weak var characterViewControllerDelegate: CharacterViewControllerDelegate?
     
     //MARK: - Lifecycle
     override func viewDidLoad() {

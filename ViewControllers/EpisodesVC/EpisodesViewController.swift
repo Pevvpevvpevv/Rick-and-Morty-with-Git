@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class EpisodesVC: UIViewController {
+final class EpisodesViewController: UIViewController {
     // MARK: - Property
     private lazy var mainTitleIV = makeMainTitleIV()
     private lazy var magnifyIV = makeMagnifyIV()
@@ -17,6 +17,7 @@ final class EpisodesVC: UIViewController {
     private lazy var collectionView = makeCollectionView()
     private var viewModel = MockEpisodesViewModel()
     private let finderTextField = FinderTextField(placeholder: "Name or episode (ex.S01E01)...")
+    weak var characterViewControllerDelegate: CharacterViewControllerDelegate?
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -159,18 +160,12 @@ final class EpisodesVC: UIViewController {
     }
 }
 
-extension EpisodesVC: UICollectionViewDelegate, UICollectionViewDataSource {
+extension EpisodesViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        navigationController?.pushViewController(CharacterVC(), animated: true)
-        // delegate?.push()
+//                navigationController?.pushViewController(CharacterVC(), animated: true)
+        characterViewControllerDelegate?.didPushCharacterVC()
     }
-    /*
-     1. создать протокол для пуша детальной ВС, где будет метод для пуша;
-     2. подписать протокол на эпизодс координатор;
-     3. создать экземпляр делегата на эпизодс вью контроллер;
-     4. подпи
-     */
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.MockEpisodesContent.count
@@ -188,6 +183,6 @@ extension EpisodesVC: UICollectionViewDelegate, UICollectionViewDataSource {
 }
 
 #Preview {
-    let vc = EpisodesVC()
+    let vc = EpisodesViewController()
     return vc
 }

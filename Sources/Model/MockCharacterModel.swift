@@ -8,8 +8,6 @@
 import UIKit
 
 struct MockCharacterModel {
-//    var buttonImage: UIImage
-//    var name: String
     var cellTitle: String
     var cellContent: String
 }

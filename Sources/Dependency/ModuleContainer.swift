@@ -24,7 +24,7 @@ final class ModuleContainer: ModuleContainerProtocol {
 
 extension ModuleContainer {
     func getLaunchView() -> UIViewController {
-        return LaunchScreenVC()
+        return LaunchScreenViewController()
     }
 }
 
@@ -33,14 +33,13 @@ extension ModuleContainer {
         let view = EpisodesViewController()
         view.characterViewControllerDelegate = delegate
         let navController = UINavigationController(rootViewController: view)
-
         return navController
     }
 }
 
 extension ModuleContainer {
     func getCharacterView() -> UIViewController {
-        let view = CharacterVC()
+        let view = CharacterViewController()
         //        let viewModel = CharacterViewModel(dependencies)
         //        view.viewModel = viewModel
         return view
@@ -49,7 +48,7 @@ extension ModuleContainer {
 
 extension ModuleContainer {
     func getFavouritesView() -> UIViewController {
-        let view = FavouritesVC()
+        let view = FavouritesViewController()
         //        let viewModel = FavouritesViewModel(dependencies)
         //        view.viewModel = viewModel
         return view

@@ -7,13 +7,13 @@
 
 import UIKit
 
-final class LaunchScreenVC: UIViewController {
+final class LaunchScreenViewController: UIViewController {
     enum Event {
         case launchComplete
     }
     
     //MARK: - Property
-    var didSendEventHandler: ((LaunchScreenVC.Event) -> Void)?
+    var didSendEventHandler: ((LaunchScreenViewController.Event) -> Void)?
     private lazy var animator: UIViewPropertyAnimator = {
         return UIViewPropertyAnimator(duration: 1, curve: .easeInOut)
     }()
@@ -65,7 +65,7 @@ final class LaunchScreenVC: UIViewController {
     }
 }
 //MARK: - Private extension
-extension LaunchScreenVC {
+extension LaunchScreenViewController {
     private func makeLaunchTitleIV() -> UIImageView {
         let title = UIImageView()
         title.contentMode = .scaleToFill

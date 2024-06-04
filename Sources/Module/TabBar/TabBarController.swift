@@ -10,7 +10,6 @@ import UIKit
 final class TabBarController: UITabBarController {
 //    private let episodesVC = EpisodesViewController()
 //    private let favouritesVC = FavouritesVC()
-    weak var coordinator: TabBarCoordinatorProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()

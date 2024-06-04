@@ -28,7 +28,7 @@ final class LaunchCoordinator: LaunchCoordinatorProtocol {
     
     func showLaunchScreenVC() {
         let launchVC = LaunchAssembly.configure(dependencies)
-        if let launchVC = launchVC as? LaunchScreenVC {
+        if let launchVC = launchVC as? LaunchScreenViewController {
             launchVC.didSendEventHandler = { [weak self] event in
                 switch event {
                 case .launchComplete:

@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class FavouritesVC: UIViewController {
+final class FavouritesViewController: UIViewController {
     weak var characterViewControllerDelegate: CharacterViewControllerDelegate?
     
     //MARK: - Lifecycle
@@ -39,6 +39,6 @@ final class FavouritesVC: UIViewController {
 }
 
 #Preview {
-    let vc = FavouritesVC()
+    let vc = FavouritesViewController()
     return vc
 }

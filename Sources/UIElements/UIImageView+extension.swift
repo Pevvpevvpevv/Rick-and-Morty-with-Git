@@ -1,5 +1,5 @@
 //
-//  UIImageView + extension.swift
+//  UIImageView+extension.swift
 //  Rick-and-Morty
 //
 //  Created by Maxim Maxim on 26.03.2024.

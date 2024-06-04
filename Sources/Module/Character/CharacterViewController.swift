@@ -11,7 +11,7 @@ protocol CharacterViewControllerDelegate: AnyObject {
     func didPushCharacterVC()
 }
 
-final class CharacterVC: UIViewController {
+final class CharacterViewController: UIViewController {
     private lazy var characterButton = makeCharacterButton()
     private lazy var cameraButton = makeCameraButton()
     private lazy var nameLabel = makeNameLabel()
@@ -139,7 +139,7 @@ final class CharacterVC: UIViewController {
     }
 }
 
-extension CharacterVC: UITableViewDelegate, UITableViewDataSource {
+extension CharacterViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.mockCharacterContent.count
@@ -159,6 +159,6 @@ extension CharacterVC: UITableViewDelegate, UITableViewDataSource {
 }
 
 #Preview {
-    let vc = CharacterVC()
+    let vc = CharacterViewController()
     return vc
 }

@@ -15,7 +15,8 @@ final class EpisodesViewController: UIViewController {
     private lazy var contentView = makeContentView()
     private lazy var scrollView = makeScrollView()
     private lazy var collectionView = makeCollectionView()
-    private var viewModel = MockEpisodesViewModel()
+    private lazy var activityIndicator = UIActivityIndicatorView()
+    private var viewModel = EpisodesViewModel()
     private let finderTextField = FinderTextField(placeholder: "Name or episode (ex.S01E01)...")
     weak var characterViewControllerDelegate: CharacterViewControllerDelegate?
     
@@ -24,12 +25,18 @@ final class EpisodesViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         configureUI()
+        viewModel.getData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
+    
+    //    override func viewDidAppear(_ animated: Bool) {
+    //        super.viewDidAppear(animated)
+    //        viewModel.getData()
+    //    }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -45,6 +52,7 @@ final class EpisodesViewController: UIViewController {
         view.addSubview(filterButton)
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
+        contentView.addSubview(activityIndicator)
         contentView.addSubview(collectionView)
     }
     
@@ -56,6 +64,7 @@ final class EpisodesViewController: UIViewController {
         contentView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             mainTitleIV.heightAnchor.constraint(equalToConstant: 104),
@@ -85,6 +94,9 @@ final class EpisodesViewController: UIViewController {
             contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             contentView.widthAnchor.constraint(equalToConstant: 320),
             contentView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            activityIndicator.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            activityIndicator.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             
             collectionView.topAnchor.constraint(equalTo: contentView.topAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -60),
@@ -158,22 +170,33 @@ final class EpisodesViewController: UIViewController {
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
         return layout
     }
+    
+    private func bindViewModel() {
+        viewModel.isLoading.bind { [weak self] isLoading in
+            guard let self, let isLoading else { return }
+            DispatchQueue.main.async {
+                isLoading ? self.activityIndicator.startAnimating() : self.activityIndicator.stopAnimating()
+            }
+        }
+    }
 }
 
 extension EpisodesViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//                navigationController?.pushViewController(CharacterVC(), animated: true)
         characterViewControllerDelegate?.didPushCharacterVC()
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.MockEpisodesContent.count
+//        return viewModel.dataSource?.count ?? 0
+        0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EpisodesCell.reuseIdentifier, for: indexPath) as? EpisodesCell else { return UICollectionViewCell() }
-        cell.configureCell(model: viewModel.MockEpisodesContent[indexPath.item])
+//        if let model = viewModel.dataSource?[indexPath.item] {
+//            cell.configureCell(model: model)
+//        }
         return cell
     }
     

@@ -80,11 +80,11 @@ class EpisodesCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureCell(model: MockEpisodesModel) {
-        characterIV.image = model.image
-        characterNameLabel.text = model.characterName
-        episodeNameLabel.text = model.episodeName
-        episodeNumber.text = model.episodeNumber
+    func configureCell(model: MainModel) {
+//        characterIV.image = model.image
+//        characterNameLabel.text = model.characterName
+//        episodeNameLabel.text = model.episodeName
+//        episodeNumber.text = model.episodeNumber
     }
     
     func setupUI() {

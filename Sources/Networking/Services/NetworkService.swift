@@ -13,7 +13,7 @@ enum NetworkError: Error {
 }
 
 final class NetworkService: ObservableObject {
-    @Published var mainModel: [MainModel] = []
+    @Published var mainModel: MainModel?
     
     init() {
         fetchData { result in
@@ -26,8 +26,7 @@ final class NetworkService: ObservableObject {
         }
     }
     
-    func fetchData(completion: @escaping ((Swift.Result<[MainModel], NetworkError>) -> Void)) {
-        
+    func fetchData(completion: @escaping ((Swift.Result<MainModel, NetworkError>) -> Void)) {
         guard let baseURL = URL(string: "https://rickandmortyapi.com/api/character") else {
             completion(.failure(.invalidURL))
             return
@@ -36,7 +35,7 @@ final class NetworkService: ObservableObject {
         URLSession.shared.dataTask(with: baseURL) { data, _, error in
             if let error = error {
                 completion(.failure(.otherError))
-            return
+                return
             }
             
             guard let data = data else {
@@ -45,7 +44,7 @@ final class NetworkService: ObservableObject {
             }
             
             do {
-                let model = try JSONDecoder().decode([MainModel].self, from: data)
+                let model = try JSONDecoder().decode(MainModel.self, from: data)
                 return completion(.success(model))
             } catch {
                 return completion(.failure(.otherError))
@@ -76,29 +75,29 @@ final class NetworkService: ObservableObject {
 //    private let urlSession: URLSession
 //    private let jsonDecoder: JSONDecoder
 //    private let jsonEncoder: JSONEncoder
-//    
+//
 //    init(urlSession: URLSession = .shared, jsonDecoder: JSONDecoder = .init(), jsonEncoder: JSONEncoder = .init()) {
 //        self.urlSession = urlSession
 //        self.jsonDecoder = jsonDecoder
 //        self.jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
 //        self.jsonEncoder = jsonEncoder
 //    }
-//    
+//
 //    func makeRequest<T: Codable>(
 //        urlString: String,
 //        method: HttpMethod,
 //        params: [String: String?],
 //        completion: @escaping ((Swift.Result<T, Error>) -> Void)) {
-//            
+//
 //            guard var urlComponents = URLComponents(string: urlString) else { return }
 //            guard let url = urlComponents.url else {
 //                NSLog ("Worst URL")
 //                return
 //            }
-//            
+//
 //            var request = URLRequest(url: url)
 //            request.httpMethod = method.rawValue
-//            
+//
 //            let task = urlSession.dataTask(with: request) { [jsonDecoder] data, response, error in
 //                switch (data, error) {
 //                case let (.some(data), nil):

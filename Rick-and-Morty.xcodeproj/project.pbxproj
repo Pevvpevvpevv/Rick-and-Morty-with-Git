@@ -17,10 +17,12 @@
 		50740DB82BAB2AFE000855B8 /* CharacterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50740DB72BAB2AFE000855B8 /* CharacterViewController.swift */; };
 		50740DBA2BAB2B2A000855B8 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50740DB92BAB2B2A000855B8 /* LaunchScreenViewController.swift */; };
 		50740DBC2BAB2B7F000855B8 /* FavouritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50740DBB2BAB2B7F000855B8 /* FavouritesViewController.swift */; };
+		5078789D2C11C6FB0009B412 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5078789C2C11C6FB0009B412 /* Observable.swift */; };
 		5078C3B12BD01B7D00892A34 /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5078C3B02BD01B7D00892A34 /* TabBarCoordinator.swift */; };
 		5078C3B32BD01F5600892A34 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5078C3B22BD01F5600892A34 /* TabBarController.swift */; };
 		5078C3B62BD01F8200892A34 /* TabBarAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5078C3B52BD01F8200892A34 /* TabBarAssembly.swift */; };
 		507924B32C0E14D1003FB1B3 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507924B22C0E14D1003FB1B3 /* Model.swift */; };
+		507D9D2A2C10659800115552 /* EpisodesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507D9D292C10659800115552 /* EpisodesViewModel.swift */; };
 		507E62F32BCD6CA1003DF0C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 507E62F02BCD6CA1003DF0C1 /* Assets.xcassets */; };
 		507E62F52BCD6CA1003DF0C1 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 507E62F22BCD6CA1003DF0C1 /* Launch Screen.storyboard */; };
 		507E62FB2BCD8C09003DF0C1 /* LaunchAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507E62FA2BCD8C08003DF0C1 /* LaunchAssembly.swift */; };
@@ -52,10 +54,12 @@
 		50740DB72BAB2AFE000855B8 /* CharacterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterViewController.swift; sourceTree = "<group>"; };
 		50740DB92BAB2B2A000855B8 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
 		50740DBB2BAB2B7F000855B8 /* FavouritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesViewController.swift; sourceTree = "<group>"; };
+		5078789C2C11C6FB0009B412 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		5078C3B02BD01B7D00892A34 /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
 		5078C3B22BD01F5600892A34 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		5078C3B52BD01F8200892A34 /* TabBarAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarAssembly.swift; sourceTree = "<group>"; };
 		507924B22C0E14D1003FB1B3 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		507D9D292C10659800115552 /* EpisodesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodesViewModel.swift; sourceTree = "<group>"; };
 		507E62F02BCD6CA1003DF0C1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		507E62F22BCD6CA1003DF0C1 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		507E62FA2BCD8C08003DF0C1 /* LaunchAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAssembly.swift; sourceTree = "<group>"; };
@@ -98,6 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				508911702C08937300E1729A /* Sources */,
+				507878992C11C4A10009B412 /* Helpers */,
 				5073C4102BD2B77200D3E128 /* Resources */,
 				50740DA12BAB129A000855B8 /* Products */,
 			);
@@ -131,6 +136,14 @@
 			path = UIElements;
 			sourceTree = "<group>";
 		};
+		507878992C11C4A10009B412 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				5078789C2C11C6FB0009B412 /* Observable.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		5078C3B42BD01F5F00892A34 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -147,6 +160,7 @@
 				507E62FC2BCD8D40003DF0C1 /* EpisodesAssembly.swift */,
 				5084F4522BDC10A40088EA1F /* EpisodesCell.swift */,
 				507100182BF86E720032CEF7 /* Extension + placeHolder.swift */,
+				507D9D292C10659800115552 /* EpisodesViewModel.swift */,
 			);
 			path = Episodes;
 			sourceTree = "<group>";
@@ -337,6 +351,7 @@
 				5078C3B32BD01F5600892A34 /* TabBarController.swift in Sources */,
 				5089116E2C088D5800E1729A /* NetworkService.swift in Sources */,
 				507100192BF86E720032CEF7 /* Extension + placeHolder.swift in Sources */,
+				5078789D2C11C6FB0009B412 /* Observable.swift in Sources */,
 				5078C3B62BD01F8200892A34 /* TabBarAssembly.swift in Sources */,
 				507E62FD2BCD8D40003DF0C1 /* EpisodesAssembly.swift in Sources */,
 				508102C02BDFAA3B0013D6D1 /* MockEpisodesModel.swift in Sources */,
@@ -344,6 +359,7 @@
 				507FDE7C2BCA811600436360 /* Dependencies.swift in Sources */,
 				507E63012BCD8DB3003DF0C1 /* FavouritesAssembly.swift in Sources */,
 				507E62FB2BCD8C09003DF0C1 /* LaunchAssembly.swift in Sources */,
+				507D9D2A2C10659800115552 /* EpisodesViewModel.swift in Sources */,
 				506FB1562BF021C5001983FF /* MockCharacterViewModel.swift in Sources */,
 				50740DA62BAB129A000855B8 /* SceneDelegate.swift in Sources */,
 				5078C3B12BD01B7D00892A34 /* TabBarCoordinator.swift in Sources */,

@@ -1,9 +1,3 @@
-//
-//  EpisodesAssembly.swift
-//  Rick-and-Morty
-//
-//  Created by Maxim Maxim on 15.04.2024.
-//
 
 import UIKit
 

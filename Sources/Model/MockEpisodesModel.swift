@@ -1,9 +1,3 @@
-//
-//  MockEpisodesModel.swift
-//  Rick-and-Morty
-//
-//  Created by Maxim Maxim on 29.04.2024.
-//
 
 import UIKit
 

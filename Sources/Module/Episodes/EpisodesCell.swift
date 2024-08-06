@@ -1,11 +1,13 @@
-//
-//  EpisodesCell.swift
-//  Rick-and-Morty
-//
-//  Created by Maxim Maxim on 26.04.2024.
-//
 
 import UIKit
+
+struct EpisodesCellModel {
+    var image: UIImage
+    var characterName: String
+    var episodeName: String
+    var episodeNumber: String
+    var isFavourite: Bool
+}
 
 class EpisodesCell: UICollectionViewCell {
     static var reuseIdentifier: String {
@@ -37,7 +39,7 @@ class EpisodesCell: UICollectionViewCell {
         return button
     }()
     
-    private lazy var characterIV: UIImageView = {
+    private lazy var characterImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleToFill
         return imageView
@@ -72,6 +74,7 @@ class EpisodesCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         setupUI()
         configureUI()
     }
@@ -80,16 +83,16 @@ class EpisodesCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureCell(model: MainModel) {
-//        characterIV.image = model.image
-//        characterNameLabel.text = model.characterName
-//        episodeNameLabel.text = model.episodeName
-//        episodeNumber.text = model.episodeNumber
+    func configure(model: EpisodesCellModel) {
+        characterImageView.image = model.image
+        characterNameLabel.text = model.characterName
+        episodeNameLabel.text = model.episodeName
+        episodeNumber.text = model.episodeNumber
     }
     
     func setupUI() {
         self.backgroundColor = .systemBackground
-        self.addSubview(characterIV)
+        self.addSubview(characterImageView)
         self.addSubview(characterNameLabel)
         self.addSubview(bottomView)
         bottomView.addSubview(leftItemImage)
@@ -107,7 +110,7 @@ class EpisodesCell: UICollectionViewCell {
         self.layer.shadowOpacity = 1
         self.layer.shadowRadius = 2
         
-        characterIV.translatesAutoresizingMaskIntoConstraints = false
+        characterImageView.translatesAutoresizingMaskIntoConstraints = false
         characterNameLabel.translatesAutoresizingMaskIntoConstraints = false
         bottomView.translatesAutoresizingMaskIntoConstraints = false
         leftItemImage.translatesAutoresizingMaskIntoConstraints = false
@@ -117,12 +120,12 @@ class EpisodesCell: UICollectionViewCell {
         heartButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            characterIV.heightAnchor.constraint(equalToConstant: 232),
-            characterIV.widthAnchor.constraint(equalToConstant: 311),
-            characterIV.topAnchor.constraint(equalTo: self.topAnchor),
-            characterIV.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            characterImageView.heightAnchor.constraint(equalToConstant: 232),
+            characterImageView.widthAnchor.constraint(equalToConstant: 311),
+            characterImageView.topAnchor.constraint(equalTo: self.topAnchor),
+            characterImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             
-            characterNameLabel.topAnchor.constraint(equalTo: characterIV.bottomAnchor),
+            characterNameLabel.topAnchor.constraint(equalTo: characterImageView.bottomAnchor),
             characterNameLabel.bottomAnchor.constraint(equalTo: bottomView.topAnchor),
             characterNameLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             characterNameLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15),

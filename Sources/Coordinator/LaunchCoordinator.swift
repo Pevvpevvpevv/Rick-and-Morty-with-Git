@@ -1,9 +1,3 @@
-//
-//  LaunchCoordinator.swift
-//  Rick-and-Morty
-//
-//  Created by Maxim Maxim on 13.04.2024.
-//
 
 import UIKit
 

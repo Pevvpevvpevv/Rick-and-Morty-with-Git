@@ -1,9 +1,3 @@
-//
-//  LaunchScreenVC.swift
-//  Rick-and-Morty
-//
-//  Created by Maxim Maxim on 20.03.2024.
-//
 
 import UIKit
 
@@ -18,12 +12,13 @@ final class LaunchScreenViewController: UIViewController {
         return UIViewPropertyAnimator(duration: 1, curve: .easeInOut)
     }()
     
-    private lazy var launchTitleIV = makeLaunchTitleIV()
-    private lazy var launchPortalIV = makeLaunchPortalIV()
+    private lazy var launchTitleImageView = makeLaunchTitleImageView()
+    private lazy var launchPortalImageView = makeLaunchPortalImageView()
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupUI()
         configureUI()
         showLaunchToMainFlowAnimation()
@@ -32,31 +27,31 @@ final class LaunchScreenViewController: UIViewController {
     //MARK: - Methods
     private func setupUI() {
         view.backgroundColor = .white
-        view.addSubview(launchTitleIV)
-        view.addSubview(launchPortalIV)
+        view.addSubview(launchTitleImageView)
+        view.addSubview(launchPortalImageView)
     }
     
     private func configureUI() {
-        launchTitleIV.translatesAutoresizingMaskIntoConstraints = false
-        launchPortalIV.translatesAutoresizingMaskIntoConstraints = false
+        launchTitleImageView.translatesAutoresizingMaskIntoConstraints = false
+        launchPortalImageView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            launchTitleIV.heightAnchor.constraint(equalToConstant: 104),
-            launchTitleIV.widthAnchor.constraint(equalToConstant: 312),
-            launchTitleIV.topAnchor.constraint(equalTo: view.topAnchor, constant: 97),
-            launchTitleIV.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            launchTitleImageView.heightAnchor.constraint(equalToConstant: 104),
+            launchTitleImageView.widthAnchor.constraint(equalToConstant: 312),
+            launchTitleImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 97),
+            launchTitleImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            launchPortalIV.heightAnchor.constraint(equalToConstant: 200),
-            launchPortalIV.widthAnchor.constraint(equalToConstant: 200),
-            launchPortalIV.topAnchor.constraint(equalTo: view.topAnchor, constant: 347),
-            launchPortalIV.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            launchPortalImageView.heightAnchor.constraint(equalToConstant: 200),
+            launchPortalImageView.widthAnchor.constraint(equalToConstant: 200),
+            launchPortalImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 347),
+            launchPortalImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
     }
     
     private func showLaunchToMainFlowAnimation() {
         animator.addAnimations {
-            self.launchTitleIV.alpha = 0
-            self.launchPortalIV.alpha = 0
+            self.launchTitleImageView.alpha = 0
+            self.launchPortalImageView.alpha = 0
         }
         animator.addCompletion { _ in
             self.didSendEventHandler?(.launchComplete)
@@ -66,7 +61,7 @@ final class LaunchScreenViewController: UIViewController {
 }
 //MARK: - Private extension
 extension LaunchScreenViewController {
-    private func makeLaunchTitleIV() -> UIImageView {
+    private func makeLaunchTitleImageView() -> UIImageView {
         let title = UIImageView()
         title.contentMode = .scaleToFill
         title.image = UIImage(named: "R&MLogo")
@@ -74,7 +69,7 @@ extension LaunchScreenViewController {
         return title
     }
     
-    private func makeLaunchPortalIV() -> UIImageView {
+    private func makeLaunchPortalImageView() -> UIImageView {
         let portal = UIImageView()
         portal.contentMode = .scaleAspectFill
         portal.image = UIImage(named: "Portal")

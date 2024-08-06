@@ -1,9 +1,3 @@
-//
-//  Extension + placeHolder.swift
-//  Rick-and-Morty
-//
-//  Created by Maxim Maxim on 18.05.2024.
-//
 
 import UIKit
 

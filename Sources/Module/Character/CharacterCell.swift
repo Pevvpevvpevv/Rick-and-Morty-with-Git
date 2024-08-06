@@ -1,18 +1,13 @@
-//
-//  CharacterCell.swift
-//  Rick-and-Morty
-//
-//  Created by Maxim Maxim on 12.05.2024.
-//
 
 import UIKit
 
 final class CharacterCell: UITableViewCell {
-    private lazy var titleLabel = makeTitleLabel()
-    private lazy var descriptionLabel = makeDescriptionLabel()
     static var reuseIdentifier: String {
         return String(describing: self)
     }
+    
+    private lazy var titleLabel = makeTitleLabel()
+    private lazy var descriptionLabel = makeDescriptionLabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

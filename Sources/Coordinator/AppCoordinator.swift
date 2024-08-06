@@ -1,9 +1,3 @@
-//
-//  AppCoordinator.swift
-//  Rick-and-Morty
-//
-//  Created by Maxim Maxim on 11.04.2024.
-//
 
 import UIKit
 
@@ -16,14 +10,13 @@ final class AppCoordinator: AppCoordinatorProtocol {
     var navigationController: UINavigationController
     var childCoordinators = [Coordinator]()
     var type: CoordinatorType { .app }
-    //    private let userDefaultsRepository: UserDefaultsRepositoryProtocol
     var dependencies: DependenciesProtocol
+    private let userDefaults: UserDefaultsManagerProtocol
     
     required init(_ navigationController: UINavigationController, dependencies: DependenciesProtocol) {
         self.navigationController = navigationController
-//        navigationController.setNavigationBarHidden(true, animated: true)
         self.dependencies = dependencies
-        //        self.userDefaultsRepository = dependencies.userDefaultsRepository
+        self.userDefaults = dependencies.userDefaultsManager
     }
     
     func start() {

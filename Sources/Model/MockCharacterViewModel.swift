@@ -1,9 +1,3 @@
-//
-//  MockCharacterViewModel.swift
-//  Rick-and-Morty
-//
-//  Created by Maxim Maxim on 12.05.2024.
-//
 
 import UIKit
 

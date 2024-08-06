@@ -1,24 +1,21 @@
-//
-//  ModuleContainer.swift
-//  Rick-and-Morty
-//
-//  Created by Maxim Maxim on 13.04.2024.
-//
 
 import UIKit
 
 protocol ModuleContainerProtocol {
     func getLaunchView() -> UIViewController
-    func getEpisodesView(delegate: CharacterViewControllerDelegate) -> UIViewController
+    func getEpisodesView(delegate: CharacterViewControllerDelegate) -> UINavigationController
     func getCharacterView() -> UIViewController
-    func getFavouritesView() -> UIViewController
+    func getFavouritesView() -> UINavigationController
     func getTabBarController(_ coordinator: TabBarCoordinatorProtocol?, delegate: CharacterViewControllerDelegate) -> UITabBarController
 }
 
 final class ModuleContainer: ModuleContainerProtocol {
     private let dependencies: DependenciesProtocol
+    private let networkService: NetworkServiceProtocol
+    
     required init(_ dependencies: DependenciesProtocol) {
         self.dependencies = dependencies
+        self.networkService = dependencies.networkService
     }
 }
 
@@ -29,9 +26,11 @@ extension ModuleContainer {
 }
 
 extension ModuleContainer {
-    func getEpisodesView(delegate: CharacterViewControllerDelegate) -> UIViewController {
+    func getEpisodesView(delegate: CharacterViewControllerDelegate) -> UINavigationController {
         let view = EpisodesViewController()
         view.characterViewControllerDelegate = delegate
+        let viewModel = EpisodesViewModel(dependencies)
+        view.viewModel = viewModel
         let navController = UINavigationController(rootViewController: view)
         return navController
     }
@@ -40,18 +39,15 @@ extension ModuleContainer {
 extension ModuleContainer {
     func getCharacterView() -> UIViewController {
         let view = CharacterViewController()
-        //        let viewModel = CharacterViewModel(dependencies)
-        //        view.viewModel = viewModel
         return view
     }
 }
 
 extension ModuleContainer {
-    func getFavouritesView() -> UIViewController {
+    func getFavouritesView() -> UINavigationController {
         let view = FavouritesViewController()
-        //        let viewModel = FavouritesViewModel(dependencies)
-        //        view.viewModel = viewModel
-        return view
+        let navController = UINavigationController(rootViewController: view)
+        return navController
     }
 }
 
@@ -60,9 +56,7 @@ extension ModuleContainer {
         let tabBar = TabBarController()
         let episodesVC = EpisodesAssembly.configure(dependencies, delegate: delegate)
         let favouritesVC = FavouritesAssembly.configure(dependencies)
-        
         tabBar.viewControllers = [episodesVC, favouritesVC]
-
         return tabBar
     }
 }

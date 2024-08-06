@@ -1,40 +1,45 @@
-//
-//  EpisodesViewModel.swift
-//  Rick-and-Morty
-//
-//  Created by Maxim Maxim on 05.06.2024.
-//
 
 import UIKit
 
+protocol EpisodesViewModelProtocol {
+    var networkEpisodes: [CharactersResult]? { get set }
+    func fetchCharactersData(completion: @escaping() -> Void)
+    func fetchEpisodeNumbers(completion: @escaping() -> Void)
+    func fetchCharacterImage(completion: @escaping() -> Void)
+}
+
 final class EpisodesViewModel {
-    private var networkService = NetworkService()
-    var isLoading: Observable<Bool> = Observable(false)
-    var dataSource: MainModel?
+    var networkEpisodes: [CharactersResult]?
+    private var model: Characters?
+    private let networkService: NetworkServiceProtocol
+    private let userDefaults: UserDefaultsManagerProtocol
     
-    func getData() {
-        isLoading.value = true
-        
-        networkService.fetchData { [weak self] result in
-            guard let self else { return }
-            self.isLoading.value = false
+    required init(_ dependencies: DependenciesProtocol) {
+        self.networkService = dependencies.networkService
+        self.userDefaults = dependencies.userDefaultsManager
+    }
+}
+
+extension EpisodesViewModel: EpisodesViewModelProtocol {
+    func fetchCharactersData(completion: @escaping() -> Void) {
+        let url: String = "https://rickandmortyapi.com/api/character"
+        networkService.fetch(from: url) { (result: Result<Characters, NetworkError>) in
             switch result {
-            case .success(let model):
-                self.dataSource = model
+            case .success(let characters):
+                self.model = characters
+                self.networkEpisodes = characters.results
+                completion()
             case .failure(let error):
                 print(error)
             }
         }
     }
-//    func getData() {
-//        isLoading.value = true
-//        
-//        networkService.fetchData { [weak self] data, error in
-//            guard let self else { return }
-//            self.isLoading.value = false
-//            if let data {
-//                self.dataSource = data
-//            }
-//        }
-//    }
+    
+    func fetchEpisodeNumbers(completion: @escaping () -> Void) {
+        
+    }
+    
+    func fetchCharacterImage(completion: @escaping () -> Void) {
+        
+    }
 }

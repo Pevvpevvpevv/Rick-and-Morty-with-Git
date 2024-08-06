@@ -1,9 +1,3 @@
-//
-//  Coordinator.swift
-//  Rick-and-Morty
-//
-//  Created by Maxim Maxim on 11.04.2024.
-//
 
 import UIKit
 

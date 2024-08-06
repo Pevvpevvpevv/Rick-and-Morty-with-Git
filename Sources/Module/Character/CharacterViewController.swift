@@ -1,9 +1,3 @@
-//
-//  CharacterVC.swift
-//  Rick-and-Morty
-//
-//  Created by Maxim Maxim on 20.03.2024.
-//
 
 import UIKit
 
@@ -21,6 +15,7 @@ final class CharacterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupUI()
         configureUI()
         configureNavBar()
@@ -28,6 +23,7 @@ final class CharacterViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         characterButton.setImage(UIImage(named: "MockImage"), for: .normal)
     }
     

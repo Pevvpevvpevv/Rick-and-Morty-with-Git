@@ -1,9 +1,3 @@
-//
-//  TabBarCoordinator.swift
-//  Rick-and-Morty
-//
-//  Created by Maxim Maxim on 17.04.2024.
-//
 
 import UIKit
 
@@ -29,12 +23,9 @@ final class TabBarCoordinator: TabBarCoordinatorProtocol {
     
     private func showTabBarController() {
         let tabBar = TabBarAssembly.configure(dependencies, coordinator: self, delegate: self)
-        //        let episodesVC = EpisodesAssembly.configure(dependencies, delegate: self)
         let episodesVC = EpisodesViewController()
         guard let tabBar = tabBar as? TabBarController,
-              let navController = tabBar.viewControllers?[0] as? UINavigationController
-//              let episodesVC = navController.viewControllers[0] as? EpisodesViewController,
-              
+              let navController = tabBar.viewControllers?[0] as? UINavigationController              
         else { return }
         
         navigationController = navController

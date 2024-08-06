@@ -1,54 +1,52 @@
-//
-//  EpisodesVC.swift
-//  Rick-and-Morty
-//
-//  Created by Maxim Maxim on 20.03.2024.
-//
 
 import UIKit
 
 final class EpisodesViewController: UIViewController {
     // MARK: - Property
-    private lazy var mainTitleIV = makeMainTitleIV()
-    private lazy var magnifyIV = makeMagnifyIV()
+    var viewModel: EpisodesViewModelProtocol? {
+        didSet {
+            viewModel?.fetchCharactersData {
+                self.collectionView.reloadData()
+            }
+        }
+    }
+    
+    weak var characterViewControllerDelegate: CharacterViewControllerDelegate?
+    private lazy var mainTitleImageView = makeMainTitleImageView()
+    private lazy var magnifyImageView = makeMagnifyImageView()
     private lazy var filterButton = makeFilterButton()
     private lazy var contentView = makeContentView()
     private lazy var scrollView = makeScrollView()
     private lazy var collectionView = makeCollectionView()
     private lazy var activityIndicator = UIActivityIndicatorView()
-    private var viewModel = EpisodesViewModel()
     private let finderTextField = FinderTextField(placeholder: "Name or episode (ex.S01E01)...")
-    weak var characterViewControllerDelegate: CharacterViewControllerDelegate?
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupUI()
         configureUI()
-        viewModel.getData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
-    //    override func viewDidAppear(_ animated: Bool) {
-    //        super.viewDidAppear(animated)
-    //        viewModel.getData()
-    //    }
-    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     //MARK: - Methods
     private func setupUI() {
         view.backgroundColor = .white
-        view.addSubview(mainTitleIV)
+        view.addSubview(mainTitleImageView)
         view.addSubview(finderTextField)
-        finderTextField.addSubview(magnifyIV)
+        finderTextField.addSubview(magnifyImageView)
         view.addSubview(filterButton)
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
@@ -57,9 +55,9 @@ final class EpisodesViewController: UIViewController {
     }
     
     private func configureUI() {
-        mainTitleIV.translatesAutoresizingMaskIntoConstraints = false
+        mainTitleImageView.translatesAutoresizingMaskIntoConstraints = false
         finderTextField.translatesAutoresizingMaskIntoConstraints = false
-        magnifyIV.translatesAutoresizingMaskIntoConstraints = false
+        magnifyImageView.translatesAutoresizingMaskIntoConstraints = false
         filterButton.translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -67,18 +65,18 @@ final class EpisodesViewController: UIViewController {
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            mainTitleIV.heightAnchor.constraint(equalToConstant: 104),
-            mainTitleIV.widthAnchor.constraint(equalToConstant: 312),
-            mainTitleIV.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            mainTitleIV.topAnchor.constraint(equalTo: view.topAnchor, constant: 57),
+            mainTitleImageView.heightAnchor.constraint(equalToConstant: 104),
+            mainTitleImageView.widthAnchor.constraint(equalToConstant: 312),
+            mainTitleImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            mainTitleImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 57),
             
             finderTextField.heightAnchor.constraint(equalToConstant: 56),
             finderTextField.widthAnchor.constraint(equalToConstant: 312),
             finderTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            finderTextField.topAnchor.constraint(equalTo: mainTitleIV.bottomAnchor, constant: 67),
+            finderTextField.topAnchor.constraint(equalTo: mainTitleImageView.bottomAnchor, constant: 67),
             
-            magnifyIV.centerYAnchor.constraint(equalTo: finderTextField.centerYAnchor),
-            magnifyIV.leadingAnchor.constraint(equalTo: finderTextField.leadingAnchor, constant: 20),
+            magnifyImageView.centerYAnchor.constraint(equalTo: finderTextField.centerYAnchor),
+            magnifyImageView.leadingAnchor.constraint(equalTo: finderTextField.leadingAnchor, constant: 20),
             
             filterButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             filterButton.topAnchor.constraint(equalTo: finderTextField.bottomAnchor, constant: 12),
@@ -105,7 +103,7 @@ final class EpisodesViewController: UIViewController {
         ])
     }
     
-    private func makeMainTitleIV() -> UIImageView {
+    private func makeMainTitleImageView() -> UIImageView {
         let title = UIImageView()
         title.contentMode = .scaleToFill
         title.image = UIImage(named: "R&MLogo")
@@ -113,7 +111,7 @@ final class EpisodesViewController: UIViewController {
         return title
     }
     
-    private func makeMagnifyIV() -> UIImageView {
+    private func makeMagnifyImageView() -> UIImageView {
         let magnify = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
         magnify.contentMode = .scaleToFill
         magnify.image = UIImage(systemName: "magnifyingglass")
@@ -170,15 +168,6 @@ final class EpisodesViewController: UIViewController {
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
         return layout
     }
-    
-    private func bindViewModel() {
-        viewModel.isLoading.bind { [weak self] isLoading in
-            guard let self, let isLoading else { return }
-            DispatchQueue.main.async {
-                isLoading ? self.activityIndicator.startAnimating() : self.activityIndicator.stopAnimating()
-            }
-        }
-    }
 }
 
 extension EpisodesViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -188,15 +177,17 @@ extension EpisodesViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return viewModel.dataSource?.count ?? 0
-        0
+        return viewModel?.networkEpisodes?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EpisodesCell.reuseIdentifier, for: indexPath) as? EpisodesCell else { return UICollectionViewCell() }
-//        if let model = viewModel.dataSource?[indexPath.item] {
-//            cell.configureCell(model: model)
-//        }
+        guard
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EpisodesCell.reuseIdentifier, for: indexPath) as? EpisodesCell,
+            let model = viewModel?.networkEpisodes? [indexPath.row]
+        else { return UICollectionViewCell() }
+        
+        cell.configure(model: .init(image: UIImage(), characterName: model.name, episodeName: model.episode[0], episodeNumber: model.episode[0], isFavourite: false))
+        
         return cell
     }
     

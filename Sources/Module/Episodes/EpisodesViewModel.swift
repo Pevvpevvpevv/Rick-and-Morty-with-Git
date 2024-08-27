@@ -1,22 +1,26 @@
 
-import UIKit
+import Foundation
 
 protocol EpisodesViewModelProtocol {
-    var networkEpisodes: [CharactersResult]? { get set }
+    var characters: [CharactersResult]? { get set }
     func fetchCharactersData(completion: @escaping() -> Void)
-    func fetchEpisodeNumbers(completion: @escaping() -> Void)
-    func fetchCharacterImage(completion: @escaping() -> Void)
+    func fetchEpisodeName(_ url: String, completion: @escaping(Episode) -> Void)
+    func getCharacterImage(from url: String, completion: @escaping(Data) -> Void)
 }
 
 final class EpisodesViewModel {
-    var networkEpisodes: [CharactersResult]?
+    var characters: [CharactersResult]?
     private var model: Characters?
+    private let dependencies: DependenciesProtocol
     private let networkService: NetworkServiceProtocol
     private let userDefaults: UserDefaultsManagerProtocol
+    private let cacheManager: CacheManagerProtocol
     
     required init(_ dependencies: DependenciesProtocol) {
+        self.dependencies = dependencies
         self.networkService = dependencies.networkService
         self.userDefaults = dependencies.userDefaultsManager
+        self.cacheManager = dependencies.cacheManager
     }
 }
 
@@ -25,9 +29,9 @@ extension EpisodesViewModel: EpisodesViewModelProtocol {
         let url: String = "https://rickandmortyapi.com/api/character"
         networkService.fetch(from: url) { (result: Result<Characters, NetworkError>) in
             switch result {
-            case .success(let characters):
-                self.model = characters
-                self.networkEpisodes = characters.results
+            case .success(let page):
+                self.model = page
+                self.characters = page.results
                 completion()
             case .failure(let error):
                 print(error)
@@ -35,11 +39,27 @@ extension EpisodesViewModel: EpisodesViewModelProtocol {
         }
     }
     
-    func fetchEpisodeNumbers(completion: @escaping () -> Void) {
-        
+    func fetchEpisodeName(_ url: String, completion: @escaping (Episode) -> Void) {
+        networkService.fetch(from: url) { (result: Result<Episode, NetworkError>) in
+            switch result {
+            case .success(let episode):
+                completion(episode)
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
     
-    func fetchCharacterImage(completion: @escaping () -> Void) {
+    func getCharacterImage(from url: String, completion: @escaping (Data) -> Void) {
+        guard let commonModel = characters else { return }
         
+        cacheManager.getImageCached(from: url, with: dependencies) { result in
+            switch result {
+            case .success(let cachedImageData):
+                completion(Data(cachedImageData))
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }

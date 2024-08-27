@@ -57,6 +57,8 @@ extension ModuleContainer {
         let episodesVC = EpisodesAssembly.configure(dependencies, delegate: delegate)
         let favouritesVC = FavouritesAssembly.configure(dependencies)
         tabBar.viewControllers = [episodesVC, favouritesVC]
+        episodesVC.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "house"), selectedImage: UIImage(systemName: "house.fill"))
+        favouritesVC.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "heart"), selectedImage: UIImage(systemName: "heart.fill"))
         return tabBar
     }
 }

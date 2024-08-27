@@ -170,6 +170,7 @@ final class EpisodesViewController: UIViewController {
     }
 }
 
+//MARK: - CollectionView extension
 extension EpisodesViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -177,16 +178,17 @@ extension EpisodesViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel?.networkEpisodes?.count ?? 0
+        return viewModel?.characters?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EpisodesCell.reuseIdentifier, for: indexPath) as? EpisodesCell,
-            let model = viewModel?.networkEpisodes? [indexPath.row]
+            let model = viewModel?.characters? [indexPath.row]
         else { return UICollectionViewCell() }
+        cell.viewModel = viewModel
         
-        cell.configure(model: .init(image: UIImage(), characterName: model.name, episodeName: model.episode[0], episodeNumber: model.episode[0], isFavourite: false))
+        cell.configure(model: .init(image: model.image, characterName: model.name, episodeName: model.episode[0], episodeNumber: model.episode[0], isFavourite: false, episodes: model.episode))
         
         return cell
     }

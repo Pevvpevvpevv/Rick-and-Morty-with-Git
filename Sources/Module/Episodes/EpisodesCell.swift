@@ -2,11 +2,12 @@
 import UIKit
 
 struct EpisodesCellModel {
-    var image: UIImage
+    var image: String
     var characterName: String
     var episodeName: String
     var episodeNumber: String
     var isFavourite: Bool
+    var episodes: [String]
 }
 
 class EpisodesCell: UICollectionViewCell {
@@ -14,6 +15,7 @@ class EpisodesCell: UICollectionViewCell {
         return String(describing: self)
     }
     
+    var viewModel: EpisodesViewModelProtocol?
     private let bottomView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(named: "GrayForCell")
@@ -84,10 +86,16 @@ class EpisodesCell: UICollectionViewCell {
     }
     
     func configure(model: EpisodesCellModel) {
-        characterImageView.image = model.image
+        viewModel?.fetchEpisodeName(model.episodes[0]) { episode in
+            self.episodeNameLabel.text = episode.name
+            self.episodeNumber.text = episode.episode
+        }
+        
+        viewModel?.getCharacterImage(from: model.image) { [weak self] data in
+            self?.characterImageView.image = UIImage(data: data)
+        }
+        
         characterNameLabel.text = model.characterName
-        episodeNameLabel.text = model.episodeName
-        episodeNumber.text = model.episodeNumber
     }
     
     func setupUI() {
@@ -136,13 +144,16 @@ class EpisodesCell: UICollectionViewCell {
             
             leftItemImage.leadingAnchor.constraint(equalTo: bottomView.leadingAnchor, constant: 20),
             leftItemImage.topAnchor.constraint(equalTo: bottomView.centerYAnchor, constant: -15),
+            leftItemImage.widthAnchor.constraint(equalToConstant: 32.88),
             
             episodeNameLabel.leadingAnchor.constraint(equalTo: leftItemImage.trailingAnchor, constant: 15),
             episodeNameLabel.topAnchor.constraint(equalTo: bottomView.centerYAnchor, constant: -5),
+            episodeNameLabel.widthAnchor.constraint(equalToConstant: 110),
             
             separationView.heightAnchor.constraint(equalToConstant: 23),
             separationView.widthAnchor.constraint(equalToConstant: 1),
             separationView.leadingAnchor.constraint(equalTo: episodeNameLabel.trailingAnchor, constant: 5),
+            separationView.trailingAnchor.constraint(equalTo: episodeNumber.leadingAnchor, constant: -5),
             separationView.topAnchor.constraint(equalTo: bottomView.centerYAnchor, constant: -7),
             
             episodeNumber.leadingAnchor.constraint(equalTo: separationView.trailingAnchor, constant: 5),
@@ -150,6 +161,7 @@ class EpisodesCell: UICollectionViewCell {
             
             heartButton.trailingAnchor.constraint(equalTo: bottomView.trailingAnchor, constant: -20),
             heartButton.topAnchor.constraint(equalTo: bottomView.centerYAnchor, constant: -15),
+            heartButton.widthAnchor.constraint(equalToConstant: 41),
         ])
     }
 }

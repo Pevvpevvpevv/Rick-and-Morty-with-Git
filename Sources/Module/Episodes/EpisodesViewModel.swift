@@ -50,10 +50,8 @@ extension EpisodesViewModel: EpisodesViewModelProtocol {
         }
     }
     
-    func getCharacterImage(from url: String, completion: @escaping (Data) -> Void) {
-        guard let commonModel = characters else { return }
-        
-        cacheManager.getImageCached(from: url, with: dependencies) { result in
+    func getCharacterImage(from url: String, completion: @escaping (Data) -> Void) {        
+        cacheManager.getImageCached(from: url, with: networkService) { result in
             switch result {
             case .success(let cachedImageData):
                 completion(Data(cachedImageData))

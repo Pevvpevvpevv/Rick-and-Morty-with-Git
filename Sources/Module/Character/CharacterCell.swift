@@ -35,9 +35,11 @@ final class CharacterCell: UITableViewCell {
         return label
     }
     
-    func configureCellViewModel(model: MockCharacterModel) {
-        titleLabel.text = model.cellTitle
-        descriptionLabel.text = model.cellContent
+    func configureCellViewModel(_ title: TableViewCellCases.RawValue, _ description: String) {
+        setupCellUI()
+        configureCellUI()
+        titleLabel.text = title
+        descriptionLabel.text = description
     }
     
     func setupCellUI() {

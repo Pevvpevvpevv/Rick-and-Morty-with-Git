@@ -1,17 +1,28 @@
 
 import UIKit
 
+enum TableViewCellCases: String, CaseIterable {
+    case gender = "Gender"
+    case status = "Status"
+    case specie = "Specie"
+    case origin = "Origin"
+    case type = "Type"
+    case location = "Location"
+}
+
 protocol CharacterViewControllerDelegate: AnyObject {
-    func didPushCharacterVC()
+    func didPushCharacterVC(_ model: CharactersResult)
 }
 
 final class CharacterViewController: UIViewController {
-    private lazy var characterButton = makeCharacterButton()
+    var characterInfo: CharactersResult?
+    var viewModel: EpisodesViewModelProtocol?
+    private lazy var characterButton = makeCharacterButton(characterInfo)
     private lazy var cameraButton = makeCameraButton()
-    private lazy var nameLabel = makeNameLabel()
+    private lazy var nameLabel = makeNameLabel(characterInfo)
     private lazy var infoLabel = makeInfoLabel()
     private lazy var tableView = makeTableView()
-    private var viewModel = MockCharacterViewModel()
+    private let tableViewCases = TableViewCellCases.allCases
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +35,6 @@ final class CharacterViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        characterButton.setImage(UIImage(named: "MockImage"), for: .normal)
     }
     
     private func setupUI() {
@@ -86,13 +96,18 @@ final class CharacterViewController: UIViewController {
         navigationController?.popToRootViewController(animated: true)
     }
     
-    private func makeCharacterButton() -> UIButton {
+    private func makeCharacterButton(_ model: CharactersResult?) -> UIButton {
         let button = UIButton()
         button.layer.cornerRadius = 74
         button.layer.borderWidth = 5
         button.layer.borderColor = UIColor.systemGray6.cgColor
         button.contentMode = .scaleAspectFill
         button.clipsToBounds = true
+        if let imageString = model?.image {
+            viewModel?.getCharacterImage(from: imageString) { data in
+                button.setImage(UIImage(data: data), for: .normal)
+            }
+        }
         return button
     }
     
@@ -103,13 +118,13 @@ final class CharacterViewController: UIViewController {
         return button
     }
     
-    private func makeNameLabel() -> UILabel {
+    private func makeNameLabel(_ model: CharactersResult?) -> UILabel {
         let label = UILabel()
         label.font = .systemFont(ofSize: 30)
         label.textColor = .black
         label.textAlignment = .center
         label.numberOfLines = 0
-        label.text = "Rick Sanchez"
+        label.text = model?.name ?? "Unknown"
         return label
     }
     
@@ -138,15 +153,34 @@ final class CharacterViewController: UIViewController {
 extension CharacterViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.mockCharacterContent.count
+        return tableViewCases.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let model = characterInfo else { return UITableViewCell() }
+        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CharacterCell.reuseIdentifier, for: indexPath) as? CharacterCell else { return UITableViewCell() }
-        cell.setupCellUI()
-        cell.configureCellUI()
-        cell.configureCellViewModel(model: viewModel.mockCharacterContent[indexPath.row])
-        return cell
+        
+        switch tableViewCases[indexPath.row] {
+        case .gender:
+            cell.configureCellViewModel(TableViewCellCases.gender.rawValue, model.gender)
+            return cell
+        case .status:
+            cell.configureCellViewModel(TableViewCellCases.status.rawValue, model.status)
+            return cell
+        case .specie:
+            cell.configureCellViewModel(TableViewCellCases.specie.rawValue, model.species)
+            return cell
+        case .origin:
+            cell.configureCellViewModel(TableViewCellCases.origin.rawValue, model.origin.name)
+            return cell
+        case .type:
+            cell.configureCellViewModel(TableViewCellCases.type.rawValue, model.type)
+            return cell
+        case .location:
+            cell.configureCellViewModel(TableViewCellCases.location.rawValue, model.location.name)
+            return cell
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -154,7 +188,7 @@ extension CharacterViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-#Preview {
-    let vc = CharacterViewController()
-    return vc
-}
+//#Preview {
+//    let vc = CharacterViewController(viewModel: <#any EpisodesViewModelProtocol#>)
+//    return vc
+//}

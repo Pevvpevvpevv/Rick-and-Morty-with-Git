@@ -232,7 +232,6 @@
 		5089116F2C08926C00E1729A /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				507FDE7A2BCA80F900436360 /* Services */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -254,6 +253,7 @@
 		508911712C08943B00E1729A /* Dependency */ = {
 			isa = PBXGroup;
 			children = (
+				507FDE7A2BCA80F900436360 /* Services */,
 				507FDE7B2BCA811600436360 /* Dependencies.swift */,
 				507FDE812BCAC29000436360 /* ModuleContainer.swift */,
 			);

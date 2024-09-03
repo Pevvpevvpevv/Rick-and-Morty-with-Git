@@ -172,9 +172,9 @@ final class EpisodesViewController: UIViewController {
 
 //MARK: - CollectionView extension
 extension EpisodesViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        characterViewControllerDelegate?.didPushCharacterVC()
+        guard let model = viewModel?.characters?[indexPath.row] else { return }
+        characterViewControllerDelegate?.didPushCharacterVC(model)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -184,12 +184,11 @@ extension EpisodesViewController: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EpisodesCell.reuseIdentifier, for: indexPath) as? EpisodesCell,
-            let model = viewModel?.characters? [indexPath.row]
+            let model = viewModel?.characters?[indexPath.row]
         else { return UICollectionViewCell() }
+        
         cell.viewModel = viewModel
-        
         cell.configure(model: .init(image: model.image, characterName: model.name, episodeName: model.episode[0], episodeNumber: model.episode[0], isFavourite: false, episodes: model.episode))
-        
         return cell
     }
     

@@ -52,8 +52,8 @@ final class TabBarCoordinator: TabBarCoordinatorProtocol {
 }
 
 extension TabBarCoordinator: CharacterViewControllerDelegate {
-    func didPushCharacterVC() {
-        let characterVC = CharacterAssembly.configure(dependencies)
+    func didPushCharacterVC(_ model: CharactersResult) {
+        let characterVC = CharacterAssembly.configure(dependencies, model)
         navigationController.pushViewController(characterVC, animated: true)
     }
 }

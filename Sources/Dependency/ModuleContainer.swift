@@ -4,7 +4,7 @@ import UIKit
 protocol ModuleContainerProtocol {
     func getLaunchView() -> UIViewController
     func getEpisodesView(delegate: CharacterViewControllerDelegate) -> UINavigationController
-    func getCharacterView() -> UIViewController
+    func getCharacterView(_ model: CharactersResult) -> UIViewController
     func getFavouritesView() -> UINavigationController
     func getTabBarController(_ coordinator: TabBarCoordinatorProtocol?, delegate: CharacterViewControllerDelegate) -> UITabBarController
 }
@@ -37,8 +37,11 @@ extension ModuleContainer {
 }
 
 extension ModuleContainer {
-    func getCharacterView() -> UIViewController {
+    func getCharacterView(_ model: CharactersResult) -> UIViewController {
         let view = CharacterViewController()
+        view.characterInfo = model
+        let viewModel = EpisodesViewModel(dependencies)
+        view.viewModel = viewModel
         return view
     }
 }

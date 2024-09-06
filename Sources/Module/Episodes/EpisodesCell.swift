@@ -85,6 +85,14 @@ class EpisodesCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        episodeNameLabel.text = nil
+        episodeNumber.text = nil
+        characterImageView.image = nil
+        characterNameLabel.text = nil
+    }
+    
     func configure(model: EpisodesCellModel) {
         viewModel?.fetchEpisodeName(model.episodes[0]) { episode in
             self.episodeNameLabel.text = episode.name

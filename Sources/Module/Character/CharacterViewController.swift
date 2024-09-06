@@ -188,7 +188,7 @@ extension CharacterViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-//#Preview {
-//    let vc = CharacterViewController(viewModel: <#any EpisodesViewModelProtocol#>)
-//    return vc
-//}
+#Preview {
+    let vc = CharacterViewController()
+    return vc
+}

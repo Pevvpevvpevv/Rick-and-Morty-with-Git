@@ -2,15 +2,17 @@
 import Foundation
 
 protocol EpisodesViewModelProtocol {
-    var characters: [CharactersResult]? { get set }
+    var model: Characters? { get set }
+    var characters: [CharactersResult] { get set }
     func fetchCharactersData(completion: @escaping() -> Void)
     func fetchEpisodeName(_ url: String, completion: @escaping(Episode) -> Void)
     func getCharacterImage(from url: String, completion: @escaping(Data) -> Void)
 }
 
 final class EpisodesViewModel {
-    var characters: [CharactersResult]?
-    private var model: Characters?
+    var model: Characters?
+    var characters: [CharactersResult] = []
+    private var currentPage = 1
     private let dependencies: DependenciesProtocol
     private let networkService: NetworkServiceProtocol
     private let userDefaults: UserDefaultsManagerProtocol
@@ -26,12 +28,13 @@ final class EpisodesViewModel {
 
 extension EpisodesViewModel: EpisodesViewModelProtocol {
     func fetchCharactersData(completion: @escaping() -> Void) {
-        let url: String = "https://rickandmortyapi.com/api/character"
+        let url: String = "https://rickandmortyapi.com/api/character?page=\(currentPage)"
         networkService.fetch(from: url) { (result: Result<Characters, NetworkError>) in
             switch result {
             case .success(let page):
                 self.model = page
-                self.characters = page.results
+                self.characters.append(contentsOf: page.results)
+                self.currentPage += 1
                 completion()
             case .failure(let error):
                 print(error)

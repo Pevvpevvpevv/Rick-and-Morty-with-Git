@@ -12,6 +12,7 @@ final class EpisodesViewController: UIViewController {
     }
     
     weak var characterViewControllerDelegate: CharacterViewControllerDelegate?
+    var isLoadingNewPage = false
     private lazy var mainTitleImageView = makeMainTitleImageView()
     private lazy var magnifyImageView = makeMagnifyImageView()
     private lazy var filterButton = makeFilterButton()
@@ -171,20 +172,20 @@ final class EpisodesViewController: UIViewController {
 }
 
 //MARK: - CollectionView extension
-extension EpisodesViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension EpisodesViewController: UICollectionViewDelegate, UICollectionViewDataSource, UIScrollViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let model = viewModel?.characters?[indexPath.row] else { return }
+        guard let model = viewModel?.characters[indexPath.row] else { return }
         characterViewControllerDelegate?.didPushCharacterVC(model)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel?.characters?.count ?? 0
+        return viewModel?.characters.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EpisodesCell.reuseIdentifier, for: indexPath) as? EpisodesCell,
-            let model = viewModel?.characters?[indexPath.row]
+            let model = viewModel?.characters[indexPath.row]
         else { return UICollectionViewCell() }
         
         cell.viewModel = viewModel
@@ -195,7 +196,29 @@ extension EpisodesViewController: UICollectionViewDelegate, UICollectionViewData
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offset = scrollView.contentOffset.y
+        let scrollViewHeight = scrollView.contentSize.height
+        let frameHeight = scrollView.frame.size.height
+        let page = viewModel?.model
+        let nextPage = page?.info.next
+        
+        guard page != nil,
+              nextPage != nil,
+              !isLoadingNewPage,
+              offset >= (scrollViewHeight - frameHeight + 90)
+        else { return }
+        
+        isLoadingNewPage = true
+        viewModel?.fetchCharactersData {
+            self.collectionView.reloadData()
+        }
+        
+        self.isLoadingNewPage = false
+    }
 }
+
 
 #Preview {
     let vc = EpisodesViewController()
